@@ -6,31 +6,32 @@
 // Create function to decide winner // 
 // Declare play variables //
 
-let play = ["rock", "paper", "scissors"];
+const play = ["rock", "paper", "scissors"];
 play = play.toLowerCase(); 
 
-function computersSelection() {
-    const play ["rock", "paper", "scissors" ];
-    return play[Math.floor(Math.random() * pick.length)];
-}
+let computerSelection;
+let playerSelection; 
+let computerScore = 0;
+let playerScore = 0;
+let winner = '';
 
-function playersSelection() {
+function computerSelection() {
     const play ["rock", "paper", "scissors"];
-    return play[Math.floor(Math.random() * pick.length)];
+    return play[Math.floor(Math.random() * play.length)];
 }
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) { 
         return `It's a tie! You both picked ${playerSelection}`;
-     } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        return "You win! rock beats scissors";
-     } else if (playerSelection === "paper" && computerSelection === "rock") {
-        return "You win! paper beats rock";
-     } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        return "You win! scissors beats paper";
-     } else {
-        return `You lose! ${computerSelection} beats ${playerSelection}`;
-     }
-        
-    
-}
+     } else if (playerSelection === "rock" && computerSelection === "scissors") ||
+               (playerSelection === "paper" && computerSelection === "rock") || 
+               (playerSelection === "scissors" && computerSelection === "paper") {
+        return playerScore++;
+        winner = 'player';
+     } else (computerSelection === "rock" && playerSelection === "scissors") || 
+               (computerSelection === "paper" && playerSelection === "rock") ||
+               (computerSelection === "scissors" && playerSelection === "paper") {
+        return computerScore++;
+        winner = 'computer' 
+               }
+            }; 
