@@ -16,7 +16,25 @@ function computerSelection() {
     return play[Math.floor(Math.random() * play.length)];
 }
 
-// Function to calculate winner 
+// Function to take players choice 
+    const getUserChoice = (playerSelection) => {
+
+        playerSelection = playerSelection.toLowerCase();
+      
+        if( playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors'){
+      
+          return playerSelection;
+      
+        }else{
+      
+         console.log('Invalid selection,choose only rock paper scissors');
+      
+        }
+      
+      }
+
+
+// Function to play single round of rock, paper, scissors  
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) { 
         return `It's a tie! You both picked ${playerSelection}`;
@@ -35,3 +53,8 @@ function playRound(playerSelection, computerSelection) {
         winner = 'computer' 
                }
             }; 
+
+// Function to keep score 
+function game() {
+
+}
