@@ -1,9 +1,10 @@
  // Rock Paper Scissors Game //    
 
-
-// Caching DOM elements 
+// Declare score variables 
 const computerScore = 0;
 const playerScore = 0;
+
+// Cache DOM elements 
 const playerScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".score-board");
@@ -12,96 +13,47 @@ const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
 
-
-// Function to play computers turn 
-function computerSelection() {
-    return play[Math.floor(Math.random() * play.length)];
+// Function to get a random choice from computer 
+function getComputerChoice() {
+    const choices = ['r', 'p', 's'];    // Declare choices variable 
+    const randomNumber = (Math.floor(Math.random() * 3));   // Declare random choice variable // Math.random returns decimal // Math.floor makes it a whole number // 
+    return choices[randomNumber];    // Returns a random letter from choices array 
 }
 
-// Function to take players choice 
-    const getUserChoice = (playerSelection) => {
+// Function to play a round 
+function game(userChoice) {
+    const computerChoice = getComputerChoice();   // Declare computers choice variable 
+    switch(userChoice + computerChoice) {        // Switch statement to decide results 
+        case "rs":                       // Rock beats Scissors 
+        case "ps":                       // Paper beats Scissors 
+        case "sp":                       // Scissors beat Paper 
+            console.log("YOU WIN!");
+        break;
+        case "rp":                      // Rock loses to Paper
+        case "ps":                      // Paper loses to Scissors 
+        case "sr":                      // Scissors loses to Rock 
+            console.log("YOU LOSE!");
+            break;
+        case "rr":                      // Rock ties with Rock 
+        case "pp":                      // Paper ties with Paper
+        case "ss":                      //Scissors ties with Scissors 
+            console.log("IT'S A TIE!");
+    }
+}
 
-        playerSelection = playerSelection.toLowerCase();
-      
-        if( playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors'){
-      
-          return playerSelection;
-      
-        }else{
-      
-         console.log('Invalid selection,choose only rock paper scissors');
-      
-        }
-      
-      }
+// Function to add event listeners to DOM elements 
+function main() {
+    rock_div.addEventListener('click', function() {
+        game('r');
+    })
 
+    paper_div.addEventListener('click', function() {
+        game('p');
+    })
 
-// Function to play single round of rock, paper, scissors  
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) { 
-        return `It's a tie! You both picked ${playerSelection}`;
-     } else if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-               (playerSelection === "paper" && computerSelection === "rock") || 
-               (playerSelection === "scissors" && computerSelection === "paper") 
-     ) {
-        return playerScore++;
-        winner = 'player';
-     } else if ( (computerSelection === "rock" && playerSelection === "scissors") || 
-               (computerSelection === "paper" && playerSelection === "rock") ||
-               (computerSelection === "scissors" && playerSelection === "paper")
-      ) ; {
-        return computerScore++;
-        winner = 'computer' 
-               }
-            }; 
+    scissors_div.addEventListener('click', function() {
+        game('s');
+    })
+};
 
-// Function to keep score 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Lets play rock paper scissors!");
-
-        console.log ("you choose " +playerSelection.toLowerCase()); 
-
-        computerSelection = ["rock","paper","scissors"];//update computerSelection
-        computerPlay= Math.floor(Math.random() * computerSelection.length);//update computerPlay
-  
-        console.log("The computer choose " +computerPlay, computerSelection[computerPlay]);//define computer input  
-
-        console.log(playRound(playerSelection, computerSelection)); 
-         }
-          if (playerScore>computerScore){
-             return "You Win this game.\n -------";
-           }
-             if (playerScore==computerScore){
-               return "This game is a tie.\n -------";
-             }
-            else{
-             return "You Lose this game.\n -------";
-           }
-        }
-        
-        console.log(game()); //play the loop
-        
-        console.log( "Your final score is " +playerScore +" wins " +computerScore +" loses and " +tieScore +" draws.\n -------");
-        
-        score=playerScore+computerScore+tieScore;
-        
-        console.log("You played this game " +score +" times.\n -------\nGame over.");
-        //count win lose or tie
-
-const playGame = () => {
-
-    const userChoice=getUserChoice('NUMNUM');
-  
-    const computerChoice=getComputerChoice();
-  
-  console.log(`Player choose ${userChoice}.
-  
-  Computer choose ${computerChoice}`);
-  
-   console.log(determineWinner(userChoice,computerChoice));
-  
-  };
-  
-  playGame();
+main();   // Call funtion
