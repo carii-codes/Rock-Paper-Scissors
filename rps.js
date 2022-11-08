@@ -1,8 +1,8 @@
  // Rock Paper Scissors Game //    
 
 // Declare score variables 
-const computerScore = 0;
-const playerScore = 0;
+let computerScore = 0;
+let playerScore = 0;
 
 // Cache DOM elements 
 const playerScore_span = document.getElementById("user-score");
@@ -20,6 +20,23 @@ function getComputerChoice() {
     return choices[randomNumber];    // Returns a random letter from choices array 
 }
 
+// Function for action after player wins 
+function win() {
+    playerScore++;      // Player gains one point per win 
+    playerScore_span.innerHTML = playerScore;     // Updates score board with players current points 
+    computerScore_span.innerHTML = computerScore;  
+}
+
+// Function for action after player loses 
+ function lose() {
+
+ }
+
+ // Funtion for action after player ties with computer 
+ function tie() {
+
+ }
+
 // Function to play a round 
 function game(userChoice) {
     const computerChoice = getComputerChoice();   // Declare computers choice variable 
@@ -27,17 +44,17 @@ function game(userChoice) {
         case "rs":                       // Rock beats Scissors 
         case "ps":                       // Paper beats Scissors 
         case "sp":                       // Scissors beat Paper 
-            console.log("YOU WIN!");
+            win();
         break;
         case "rp":                      // Rock loses to Paper
         case "ps":                      // Paper loses to Scissors 
         case "sr":                      // Scissors loses to Rock 
-            console.log("YOU LOSE!");
+            lose(); 
             break;
         case "rr":                      // Rock ties with Rock 
         case "pp":                      // Paper ties with Paper
         case "ss":                      //Scissors ties with Scissors 
-            console.log("IT'S A TIE!");
+            tie();
     }
 }
 
