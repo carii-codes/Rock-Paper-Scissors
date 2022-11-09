@@ -8,7 +8,7 @@ let playerScore = 0;
 const playerScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".score-board");
-const results_div = document.querySelector(".results");
+const results_p = document.querySelector(".results > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
@@ -16,21 +16,32 @@ const scissors_div = document.getElementById("s");
 // Function to get a random choice from computer 
 function getComputerChoice() {
     const choices = ['r', 'p', 's'];    // Declare choices variable 
-    const randomNumber = (Math.floor(Math.random() * 3));   // Declare random choice variable // Math.random returns decimal // Math.floor makes it a whole number // 
+    const randomNumber = Math.floor(Math.random() * 3);   // Declare random choice variable // Math.random returns decimal // Math.floor makes it a whole number // 
     return choices[randomNumber];    // Returns a random letter from choices array 
 }
 
+// Function to convert letters in choices array to the full word 
+function convertChoices(letter) {       
+    if (letter === 'r') return 'Rock';
+    if (letter === 'p') return 'Paper';
+    return 'Scissors';
+}
+
 // Function for action after player wins 
-function win() {
+function win(userChoice, computerChoice) {      // Gives win function two choice parameters 
     playerScore++;      // Player gains one point per win 
-    playerScore_span.innerHTML = playerScore;     // Updates score board with players current points 
-    computerScore_span.innerHTML = computerScore;  
+    playerScore_span.innerHTML = playerScore;     // Updates score board when player wins 
+    computerScore_span.innerHTML = computerScore;  // Updates score board when computer wins 
+    results_p.innerHTML = `${convertChoices(userChoice)} beats ${convertChoices(computerChoice)}. You win!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns winner 
 }
 
 // Function for action after player loses 
  function lose() {
-
- }
+    computerScore++;      // Computer gains one point per win 
+    playerScore_span.innerHTML = playerScore;     // Updates score board when player wins 
+    computerScore_span.innerHTML = computerScore;  // Updates score board when computer wins 
+    results_p.innerHTML = `${convertChoices(userChoice)} loses to ${convertChoices(computerChoice)}. You win!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns winner 
+}
 
  // Funtion for action after player ties with computer 
  function tie() {
@@ -42,7 +53,7 @@ function game(userChoice) {
     const computerChoice = getComputerChoice();   // Declare computers choice variable 
     switch(userChoice + computerChoice) {        // Switch statement to decide results 
         case "rs":                       // Rock beats Scissors 
-        case "ps":                       // Paper beats Scissors 
+        case "pr":                       // Paper beats Rock 
         case "sp":                       // Scissors beat Paper 
             win();
         break;
@@ -53,7 +64,7 @@ function game(userChoice) {
             break;
         case "rr":                      // Rock ties with Rock 
         case "pp":                      // Paper ties with Paper
-        case "ss":                      //Scissors ties with Scissors 
+        case "ss":                      // Scissors ties with Scissors 
             tie();
     }
 }
