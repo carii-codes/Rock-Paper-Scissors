@@ -27,26 +27,37 @@ function convertChoices(letter) {
     return 'Scissors';
 }
 
-// Function for action after player wins 
+// Function for action after player WINS
 function win(userChoice, computerChoice) {      // Defines the win functions two choice parameters 
+    const userChoice_div = document.getElementById(userChoice);   // Declare user choise variable 
     playerScore++;      // Player gains one point per win 
     playerScore_span.innerHTML = playerScore;     // Updates score board when player wins 
     computerScore_span.innerHTML = computerScore;  // Updates score board when computer wins 
-    results_p.innerHTML = `${convertChoices(userChoice)} beats ${convertChoices(computerChoice)}. You win!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns winner 
+    results_p.innerHTML = `${convertChoices(userChoice)} beats ${convertChoices(computerChoice)}. You win!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns WINNER 
+    userChoice_div.classList.add('green-glow');     // Adds class of green glow to users choice when user WINS 
+    setTimeout(() => userChoice_div.classList.remove('green-glow'), 500 );    // Sets off timer to remove green glow 300 miliseconds after announcing WINNER 
 }
 
-// Function for action after player loses 
+// Function for action after player LOSES 
  function lose(userChoice, computerChoice) {        // Defines the lose function arguments 
+    const userChoice_div = document.getElementById(userChoice);   // Declare user choise variable 
     computerScore++;      // Computer gains one point per win 
     playerScore_span.innerHTML = playerScore;     // Updates score board when player wins 
     computerScore_span.innerHTML = computerScore;  // Updates score board when computer wins 
-    results_p.innerHTML = `${convertChoices(computerChoice)} beats ${convertChoices(userChoice)}. You lose!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns winner 
+    results_p.innerHTML = `${convertChoices(computerChoice)} beats ${convertChoices(userChoice)}. You lose!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns LOSER
+    userChoice_div.classList.add('red-glow');     // Adds class of red glow to users choice when user LOSES 
+    setTimeout(() => userChoice_div.classList.remove('red-glow'), 500 );    // Sets off timer to remove green glow 300 miliseconds after announcing LOSER 
+
 }
 
- // Funtion for action after player ties with computer 
+ // Funtion for action after player TIES with computer 
  function tie(userChoice, computerChoice) {
-    results_p.innerHTML = `${convertChoices(userChoice)} ties with ${convertChoices(computerChoice)}. It's a draw!`;
- }
+    const userChoice_div = document.getElementById(userChoice);   // Declare user choise variable 
+    results_p.innerHTML = `${convertChoices(userChoice)} ties with ${convertChoices(computerChoice)}. It's a draw!`;    // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns its a DRAW
+    userChoice_div.classList.add('gray-glow');     // Adds class of gray glow to users choice when user TIES with computer 
+    setTimeout(() => userChoice_div.classList.remove('gray-glow'), 500 );    // Sets off timer to remove gray glow 300 miliseconds after announcing its a TIE  
+
+}
 
 // Function to play a round 
 function game(userChoice) {
@@ -71,17 +82,9 @@ function game(userChoice) {
 
 // Function to add event listeners to DOM elements 
 function main() {
-    rock_div.addEventListener('click', function() {
-        game('r');
-    })
-
-    paper_div.addEventListener('click', function() {
-        game('p');
-    })
-
-    scissors_div.addEventListener('click', function() {
-        game('s');
-    })
+    rock_div.addEventListener('click', () =>  game('r'));   // 
+    paper_div.addEventListener('click', () => game('p'));   // 
+    scissors_div.addEventListener('click', () => game('s'));    // 
 };
 
 main();   // Call funtion
