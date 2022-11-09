@@ -28,7 +28,7 @@ function convertChoices(letter) {
 }
 
 // Function for action after player wins 
-function win(userChoice, computerChoice) {      // Gives win function two choice parameters 
+function win(userChoice, computerChoice) {      // Defines the win functions two choice parameters 
     playerScore++;      // Player gains one point per win 
     playerScore_span.innerHTML = playerScore;     // Updates score board when player wins 
     computerScore_span.innerHTML = computerScore;  // Updates score board when computer wins 
@@ -36,36 +36,36 @@ function win(userChoice, computerChoice) {      // Gives win function two choice
 }
 
 // Function for action after player loses 
- function lose() {
+ function lose(userChoice, computerChoice) {        // Defines the lose function arguments 
     computerScore++;      // Computer gains one point per win 
     playerScore_span.innerHTML = playerScore;     // Updates score board when player wins 
     computerScore_span.innerHTML = computerScore;  // Updates score board when computer wins 
-    results_p.innerHTML = `${convertChoices(userChoice)} loses to ${convertChoices(computerChoice)}. You win!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns winner 
+    results_p.innerHTML = `${convertChoices(computerChoice)} beats ${convertChoices(userChoice)}. You lose!`;   // Applying convertChoices funtion to the choices given by user and comp // add function and string using ES6 // Returns winner 
 }
 
  // Funtion for action after player ties with computer 
- function tie() {
-
+ function tie(userChoice, computerChoice) {
+    results_p.innerHTML = `${convertChoices(userChoice)} ties with ${convertChoices(computerChoice)}. It's a draw!`;
  }
 
 // Function to play a round 
 function game(userChoice) {
-    const computerChoice = getComputerChoice();   // Declare computers choice variable 
+    const computerChoice = getComputerChoice();   // Declares computers choice variable 
     switch(userChoice + computerChoice) {        // Switch statement to decide results 
         case "rs":                       // Rock beats Scissors 
         case "pr":                       // Paper beats Rock 
         case "sp":                       // Scissors beat Paper 
-            win();
+            win(userChoice, computerChoice);      // Defines the win function arguments 
         break;
         case "rp":                      // Rock loses to Paper
         case "ps":                      // Paper loses to Scissors 
         case "sr":                      // Scissors loses to Rock 
-            lose(); 
+            lose(userChoice, computerChoice);     // Defines the lose function arguments 
             break;
         case "rr":                      // Rock ties with Rock 
         case "pp":                      // Paper ties with Paper
         case "ss":                      // Scissors ties with Scissors 
-            tie();
+            tie(userChoice, computerChoice);      // Defines the tie function arguments 
     }
 }
 
